@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            display: block;
+            width: 300px;
+            height: 550px;
+            background-color: rgb(0, 0, 0);
+            margin: 0 auto;
+            border-radius: 20px;
+            align-items: center;
+            
+            }
+
+        table {
+            width: 280px;
+            height: 480px;
+            margin: 0 auto;
+            padding-top: 100px;
+            border-spacing: 5px;
+            position: fixed;
+            }
+
+        button {}
+
+        .tr2 {
+            border-radius: 50%;
+            background-color: darkgrey;
+            box-shadow: 2px 2px 2px 2px rgb(116, 62, 1);
+            font-weight: 500;
+            border: 2px solid rgb(255, 255, 255);
+            width: 50px;
+            height: 50px;
+            font-size: larger;
+            
+             }
+
+             .tr3 {
+                border-radius: 50%;
+                background-color: darkgrey;
+                box-shadow: 2px 2px 2px 2px rgb(116, 62, 1);
+                font-size: larger;
+                border: 2px solid rgb(255, 255, 255);
+                width: 100px;
+                height: 50px;
+                
+                 }
+
+
+        #row1 {
+            color: white;
+            background-color: black;
+            padding-bottom: 100px;
+            font-size: 30px;
+            height: 80px;
+            width: 250px;
+            
+        }
+
+        .tr2:hover {
+            background-color: rgb(1, 0, 59);
+            color: beige;
+        }
+        .tr3:hover {
+            background-color: rgb(37, 3, 0);
+            color: bisque;
+        }
+
+        #equal {
+            background-color: orangered;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <table>
+            <tr>
+                <td colspan="5"><button id="row1"></button></td>
+            </tr>
+            <tr>
+                <td><button class="tr2" id="oneno" onclick="appendNumber('1')">1</button></td>
+                <td><button class="tr2" onclick="appendNumber('2')">2</button></td>
+                <td><button class="tr2" onclick="appendNumber('3')">3</button></td>
+                <td><button class="tr2" onclick="clearDisplay()">AC</button></td>
+                <td><button class="tr2" onclick="appendOperator('-')">-</button></td>
+            </tr>
+            <tr>
+                <td><button class="tr2" onclick="appendNumber('4')">4</button></td>
+                <td><button class="tr2" onclick="appendNumber('5')">5</button></td>
+                <td><button class="tr2" onclick="appendNumber('6')">6</button></td>
+                <td><button class="tr2" onclick="appendOperator('+')">+</button></td>
+                <td><button class="tr2" onclick="appendOperator('*')">x</button></td>
+            </tr>
+            <tr>
+                <td><button class="tr2" onclick="appendNumber('7')">7</button></td>
+                <td><button class="tr2" onclick="appendNumber('8')">8</button></td>
+                <td><button class="tr2" onclick="appendNumber('9')">9</button></td>
+                <td><button class="tr2" onclick="appendOperator('%')">%</button></td>
+                <td><button class="tr2" onclick="appendOperator('/')">/</button></td>
+            </tr>
+            <tr>
+                <td><button class="tr2" onclick="appendNumber('0')">0</button></td>
+                <td><button class="tr2" onclick="appendNumber('.')">.</button></td>
+                <td><button class="tr2" onclick="appendNumber('(')">(</button></td>
+                <td><button class="tr2" onclick="appendNumber(')')">)</button></td>
+               
+                <td><button class="tr2" onclick="appendOperator('-')">+/-</button></td>
+                
+            </tr>
+            <tr>
+                <td><button class="tr2" onclick="appendFunction('Math.sin(Math.PI / 180 * ')">Sin</button></td>
+                <td><button class="tr2" onclick="appendFunction('Math.cos(Math.PI / 180 * ')">Cos</button></td>
+                <td><button class="tr2" onclick="appendFunction('Math.tan(Math.PI / 180 * ')">Tan</button></td>
+                <td><button class="tr2" onclick="appendFunction('1 / Math.tan(Math.PI / 180 * ')">Cot</button></td>
+               
+                <td><button class="tr2" id="equal" onclick="calculate()">=</button></td>
+                
+            </tr>
+
+        </table>
+    </div>
+    <script>
+        let display = document.getElementById('row1');
+
+        function appendNumber(number) {
+            display.innerHTML += number;
+            adjustFontSize();
+        }
+
+        function appendOperator(operator) {
+            display.innerHTML += operator;
+            adjustFontSize();
+        }
+        function appendFunction(func) {
+            display.innerHTML += func;
+            adjustFontSize();
+        }
+
+        function clearDisplay() {
+            display.innerHTML = '';
+            adjustFontSize();
+        }
+
+        function calculate() {
+            try {
+                display.innerHTML = eval(display.innerHTML).toFixed(8);
+                adjustFontSize();
+            } catch (error) {
+                display.innerHTML = 'Error';
+                adjustFontSize();
+            }
+        }
+        function adjustFontSize() {
+            const maxFontSize = 50;
+            const minFontSize = 14;
+
+            const contentLength = display.textContent.length;
+            const fontSize = Math.max(minFontSize, maxFontSize - contentLength);
+
+            
+            display.style.fontSize = fontSize + 'px';
+        }
+    </script>
+</body>
+
+</html>
